@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Suchita Foundation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brown-dark: #92400E;
+            --brown-medium: #B45309;
+            --brown-light: #FEF3C7;
+            --brown-hover: #78350F;
+            --text-dark: #1F2937;
+            --text-medium: #4B5563;
+            --border-light: #E5E7EB;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #F5F6F8;
+            padding-top: 140px;
+        }
+
+        /* Navigation Styles */
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 40px;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-logo a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--brown-dark);
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .nav-logo h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 500px;
+            margin: 0 40px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 40px;
+            border: 2px solid var(--border-light);
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--brown-dark);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-medium);
+        }
+
+        /* Main Menu */
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 15px;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+
+        .menu-item {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            color: var(--brown-dark);
+        }
+
+        .menu-item.active {
+            color: var(--brown-dark);
+        }
+
+        /* Donation Content */
+        .donation-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .donation-title {
+            color: var(--brown-dark);
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Amount Options */
+        .amount-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .amount-btn {
+            padding: 15px;
+            border: 2px solid var(--brown-dark);
+            border-radius: 10px;
+            background: transparent;
+            color: var(--brown-dark);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .amount-btn.active {
+            background: var(--brown-dark);
+            color: var(--white);
+        }
+
+        .amount-btn:hover:not(.active) {
+            background: var(--brown-light);
+        }
+
+        /* Custom Amount Input */
+        .custom-amount {
+            margin-bottom: 25px;
+        }
+
+        .custom-amount input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border-light);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .custom-amount input:focus {
+            outline: none;
+            border-color: var(--brown-dark);
+        }
+
+        /* Impact Message */
+        .impact-message {
+            background: var(--brown-light);
+            color: var(--brown-dark);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .payment-method {
+            padding: 20px;
+            border: 2px solid var(--border-light);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method.active {
+            background: var(--brown-light);
+            border-color: var(--brown-dark);
+        }
+
+        .payment-method:hover:not(.active) {
+            border-color: var(--brown-dark);
+        }
+
+        .payment-method i {
+            font-size: 24px;
+            color: var(--brown-dark);
+            margin-bottom: 10px;
+        }
+
+        .payment-method p {
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border-light);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--brown-dark);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--brown-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: var(--brown-hover);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .search-container {
+                max-width: 300px;
+                margin: 0 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 15px 20px;
+            }
+
+            .search-container {
+                display: none;
+            }
+
+            .main-menu {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 15px 20px;
+                gap: 20px;
+            }
+
+            .menu-item {
+                white-space: nowrap;
+            }
+
+            .donation-container {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            .amount-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Error Styles */
+        .error-message {
+            color: #DC2626;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .input-error {
+            border-color: #DC2626 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="Logo.png" alt="Suchita Foundation Logo" class="logo">
+                <h1>Suchita Foundation</h1>
+            </a>
+        </div>
+        
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search..." class="search-input">
+        </div>
+
+        <button class="donate-btn">Donate Us</button>
+    </nav>
+
+    <!-- Main Menu -->
+    <div class="main-menu">
+        <a href="index.html" class="menu-item">Home</a>
+        <a href="about.html" class="menu-item">About Us</a>
+        <a href="our-work.html" class="menu-item">Our Work</a>
+        <a href="campaigns.html" class="menu-item">Campaigns</a>
+        <a href="get-involved.html" class="menu-item">Get Involved</a>
+        <a href="media.html" class="menu-item">Media</a>
+        <a href="resource-centre.html" class="menu-item">Resource Centre</a>
+        <a href="contact us.html" class="menu-item">Contact Us</a>
+    </div>
+
+    <!-- Donation Content -->
+    <div class="donation-container">
+        <h1 class="donation-title">Make a Difference</h1>
+
+        <!-- Amount Options -->
+        <div class="amount-options">
+            <button class="amount-btn" data-amount="500">₹500</button>
+            <button class="amount-btn active" data-amount="1000">₹1,000</button>
+            <button class="amount-btn" data-amount="2000">₹2,000</button>
+            <button class="amount-btn" data-amount="5000">₹5,000</button>
+        </div>
+
+        <!-- Custom Amount -->
+        <div class="custom-amount">
+            <input type="number" placeholder="Enter custom amount" min="100">
+        </div>
+
+        <!-- Impact Message -->
+        <div class="impact-message">
+            Your donation of ₹1,000 can provide health check-ups for two women
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="payment-methods">
+            <div class="payment-method active">
+                <i class="fas fa-mobile-alt"></i>
+                <p>UPI</p>
+            </div>
+            <div class="payment-method">
+                <i class="fas fa-credit-card"></i>
+                <p>Card</p>
+            </div>
+            <div class="payment-method">
+                <i class="fas fa-university"></i>
+                <p>Net Banking</p>
+            </div>
+        </div>
+
+        <!-- Donor Form -->
+        <form id="donorForm">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" required>
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" required>
+            </div>
+            <div class="form-group">
+                <label>PAN Number (Optional)</label>
+                <input type="text">
+            </div>
+
+            <button type="submit" class="submit-btn">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Amount Selection
+            const amountBtns = document.querySelectorAll('.amount-btn');
+            const customAmount = document.querySelector('.custom-amount input');
+            const impactMessage = document.querySelector('.impact-message');
+
+            amountBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    customAmount.value = '';
+                    updateImpactMessage(parseInt(btn.dataset.amount));
+                });
+            });
+
+            customAmount.addEventListener('input', (e) => {
+                amountBtns.forEach(btn => btn.classList.remove('active'));
+                updateImpactMessage(parseInt(e.target.value) || 0);
+            });
+
+            // Payment Method Selection
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', () => {
+                    paymentMethods.forEach(m => m.classList.remove('active'));
+                    method.classList.add('active');
+                });
+            });
+
+            // Form Validation
+            const form = document.getElementById('donorForm');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (validateForm()) {
+                    alert('Proceeding to payment gateway...');
+                }
+            });
+
+            function updateImpactMessage(amount) {
+                let message = '';
+                if (amount < 1000) {
+                    message = `Your donation of ₹${amount} can provide educational materials for one woman`;
+                } else if (amount < 2000) {
+                    message = `Your donation of ₹${amount} can provide health check-ups for two women`;
+                } else if (amount < 5000) {
+                    message = `Your donation of ₹${amount} can provide digital literacy training for one woman`;
+                } else {
+                    message = `Your donation of ₹${amount} can help start a small business`;
+                }
+                impactMessage.textContent = message;
+            }
+
+            function validateForm() {
+                let isValid = true;
+                const inputs = form.querySelectorAll('input[required]');
+                
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        showError(input, 'This field is required');
+                        isValid = false;
+                    } else {
+                        removeError(input);
+                        
+                        // Email validation
+                        if (input.type === 'email' && !validateEmail(input.value)) {
+                            showError(input, 'Please enter a valid email address');
+                            isValid = false;
+                        }
+                        
+                        // Phone validation
+                        if (input.type === 'tel' && !validatePhone(input.value)) {
+                            showError(input, 'Please enter a valid 10-digit phone number');
+                            isValid = false;
+                        }
+                    }
+                });
+
+                return isValid;
+            }
+
+            function showError(input, message) {
+                removeError(input);
+                input.classList.add('input-error');
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.textContent = message;
+                input.parentNode.appendChild(errorDiv);
+            }
+
+            function removeError(input) {
+                input.classList.remove('input-error');
+                const errorDiv = input.parentNode.querySelector('.error-message');
+                if (errorDiv) errorDiv.remove();
+            }
+
+            function validateEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            function validatePhone(phone) {
+                return /^[0-9]{10}$/.test(phone.replace(/[^0-9]/g, ''));
+            }
+
+            // Search functionality
+            const searchInput = document.querySelector('.search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', debounce((e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    if (searchTerm.length < 2) return;
+                    
+                    // Here you would typically make an API call to search
+                    // For demonstration, we'll just log the search term
+                    console.log('Searching for:', searchTerm);
+                }, 300));
+            }
+
+            // Utility function for debouncing
+            function debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+
+            // Highlight current page in navigation
+            const currentPage = window.location.pathname.split('/').pop();
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                if (item.getAttribute('href') === currentPage) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Mobile menu scroll handling
+            const mainMenu = document.querySelector('.main-menu');
+            if (mainMenu) {
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+
+                mainMenu.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    startX = e.pageX - mainMenu.offsetLeft;
+                    scrollLeft = mainMenu.scrollLeft;
+                });
+
+                mainMenu.addEventListener('mouseleave', () => {
+                    isDown = false;
+                });
+
+                mainMenu.addEventListener('mouseup', () => {
+                    isDown = false;
+                });
+
+                mainMenu.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - mainMenu.offsetLeft;
+                    const walk = (x - startX) * 2;
+                    mainMenu.scrollLeft = scrollLeft - walk;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

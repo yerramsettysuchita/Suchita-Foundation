@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Work - Suchita Foundation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Navigation Styles */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 50px;
+        }
+
+        .nav-logo h1 {
+            color: #1A202C;
+            font-size: 1.5rem;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #718096;
+        }
+
+        .donate-btn {
+            background: #92400E;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .donate-btn:hover {
+            background: #78350F;
+        }
+
+        /* Main Menu Styles */
+        .main-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            z-index: 999;
+        }
+
+        .main-menu a {
+            color: #4A5568;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .main-menu a:hover,
+        .main-menu a.active {
+            color: #92400E;
+        }
+
+        /* Our Work Section Styles */
+        .our-work-section {
+            padding: 160px 0 80px;
+            background-color: #F5F6F8;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1A202C;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: center;
+            color: #4A5568;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .category-section {
+            margin-bottom: 60px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .category-title {
+            font-size: 36px;
+            color: #92400E;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #92400E;
+        }
+
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .playlist-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid #E2E8F0;
+        }
+
+        .playlist-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .playlist-card h3 {
+            padding: 20px;
+            margin: 0;
+            color: #92400E;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #F9FAFB;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #4A5568;
+            background: linear-gradient(45deg, #FEF3C7, #FBBF24);
+            transition: all 0.3s ease;
+        }
+
+        .video-placeholder:hover {
+            background: linear-gradient(45deg, #FBBF24, #92400E);
+            color: white;
+        }
+
+        .video-placeholder i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .video-placeholder:hover i {
+            transform: scale(1.1);
+        }
+
+        .video-placeholder p {
+            padding: 0 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .playlist-description {
+            padding: 20px;
+        }
+
+        .playlist-description p {
+            margin: 0 0 15px;
+            color: #4A5568;
+            line-height: 1.6;
+            min-height: 3.2em;
+        }
+
+        .view-playlist {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #92400E;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .view-playlist:hover {
+            background-color: #78350F;
+            transform: translateY(-2px);
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            display: none;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #F3F3F3;
+            border-top: 5px solid #92400E;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .category-section {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .main-menu {
+                padding: 0.5rem;
+                gap: 1rem;
+                overflow-x: auto;
+                justify-content: flex-start;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+
+            .category-title {
+                font-size: 28px;
+            }
+
+            .playlist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-text {
+                font-size: 16px;
+                padding: 0 20px;
+            }
+
+            .playlist-card h3 {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-logo h1 {
+                font-size: 1.2rem;
+            }
+
+            .search-container {
+                display: none;
+            }
+
+            .donate-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Indicator -->
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-logo">
+        <a href="index.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+            <img src="Logo.png" alt="Suchita Foundation Logo" class="logo">
+            <h1>Suchita Foundation</h1>
+        </a>
+    </div>
+        
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search..." class="search-input">
+            <div class="search-results"></div>
+        </div>
+
+        <a href="donate.html" class="donate-btn" target="_blank">Donate Us</a>
+    </nav>
+
+    <!-- Main Menu -->
+    <div class="main-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="our-work.html" class="active">Our Work</a>
+        <a href="campaigns.html">Campaigns</a>
+        <a href="get-involved.html">Get Involved</a>
+        <a href="media.html">Media</a>
+        <a href="resource-centre.html">Resource Centre</a>
+        <a href="contact-us.html">Contact Us</a>
+    </div>
+
+    <!-- Our Work Content -->
+    <section class="our-work-section">
+        <div class="container">
+            <h1 class="page-title">Our Work</h1>
+            <div class="intro-text">
+                <p>Explore our curated YouTube playlists designed to provide comprehensive learning resources across all our intervention areas. Each section contains valuable insights and practical knowledge to support your growth and development.</p>
+            </div>
+
+           <!-- Women's Health Awareness -->
+           <div class="playlist-card">
+            <h3>Women's Health Awareness</h3>
+            <div class="video-container">
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_6" 
+                   class="video-placeholder" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   data-playlist-id="PLAYLIST_ID_6">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Essential women's health education and awareness</p>
+                </a>
+            </div>
+            <div class="playlist-description">
+                <p>Comprehensive information about women's health issues and preventive care.</p>
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_6" 
+                   class="view-playlist" 
+                   target="_blank" 
+                   rel="noopener noreferrer">View Full Playlist</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Career Development Category -->
+<div class="category-section">
+    <h2 class="category-title">Career Development</h2>
+    <div class="playlist-grid">
+        <!-- Resume Building -->
+        <div class="playlist-card">
+            <h3>Resume Building</h3>
+            <div class="video-container">
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_7" 
+                   class="video-placeholder" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   data-playlist-id="PLAYLIST_ID_7">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Professional resume writing techniques</p>
+                </a>
+            </div>
+            <div class="playlist-description">
+                <p>Learn how to create compelling resumes that showcase your skills effectively.</p>
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_7" 
+                   class="view-playlist" 
+                   target="_blank" 
+                   rel="noopener noreferrer">View Full Playlist</a>
+            </div>
+        </div>
+
+        <!-- Interview Skills -->
+        <div class="playlist-card">
+            <h3>Interview Preparation</h3>
+            <div class="video-container">
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_8" 
+                   class="video-placeholder" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   data-playlist-id="PLAYLIST_ID_8">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Master interview techniques and confidence building</p>
+                </a>
+            </div>
+            <div class="playlist-description">
+                <p>Comprehensive guide to ace your job interviews and present yourself professionally.</p>
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_8" 
+                   class="view-playlist" 
+                   target="_blank" 
+                   rel="noopener noreferrer">View Full Playlist</a>
+            </div>
+        </div>
+
+        <!-- Career Planning -->
+        <div class="playlist-card">
+            <h3>Career Planning</h3>
+            <div class="video-container">
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_9" 
+                   class="video-placeholder" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   data-playlist-id="PLAYLIST_ID_9">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Strategic career planning and development</p>
+                </a>
+            </div>
+            <div class="playlist-description">
+                <p>Guide to planning your career path and achieving professional goals.</p>
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_9" 
+                   class="view-playlist" 
+                   target="_blank" 
+                   rel="noopener noreferrer">View Full Playlist</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Digital Skills Category -->
+<div class="category-section">
+    <h2 class="category-title">Digital Skills</h2>
+    <div class="playlist-grid">
+        <!-- Basic Computer Skills -->
+        <div class="playlist-card">
+            <h3>Computer Fundamentals</h3>
+            <div class="video-container">
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_10" 
+                   class="video-placeholder" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   data-playlist-id="PLAYLIST_ID_10">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Essential computer and internet skills</p>
+                </a>
+            </div>
+            <div class="playlist-description">
+                <p>Basic computer operations and internet usage for beginners.</p>
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_10" 
+                   class="view-playlist" 
+                   target="_blank" 
+                   rel="noopener noreferrer">View Full Playlist</a>
+            </div>
+        </div>
+
+        <!-- Digital Marketing -->
+        <div class="playlist-card">
+            <h3>Digital Marketing</h3>
+            <div class="video-container">
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_11" 
+                   class="video-placeholder" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   data-playlist-id="PLAYLIST_ID_11">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Social media and digital marketing skills</p>
+                </a>
+            </div>
+            <div class="playlist-description">
+                <p>Learn to leverage digital platforms for business growth and personal branding.</p>
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_11" 
+                   class="view-playlist" 
+                   target="_blank" 
+                   rel="noopener noreferrer">View Full Playlist</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Financial Literacy Category -->
+<div class="category-section">
+    <h2 class="category-title">Financial Literacy</h2>
+    <div class="playlist-grid">
+        <!-- Personal Finance -->
+        <div class="playlist-card">
+            <h3>Personal Finance Management</h3>
+            <div class="video-container">
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_12" 
+                   class="video-placeholder" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   data-playlist-id="PLAYLIST_ID_12">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Basic financial planning and management</p>
+                </a>
+            </div>
+            <div class="playlist-description">
+                <p>Essential skills for managing personal finances and budgeting.</p>
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_12" 
+                   class="view-playlist" 
+                   target="_blank" 
+                   rel="noopener noreferrer">View Full Playlist</a>
+            </div>
+        </div>
+
+        <!-- Investment Basics -->
+        <div class="playlist-card">
+            <h3>Investment Fundamentals</h3>
+            <div class="video-container">
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_13" 
+                   class="video-placeholder" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   data-playlist-id="PLAYLIST_ID_13">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Introduction to investments and savings</p>
+                </a>
+            </div>
+            <div class="playlist-description">
+                <p>Learn about different investment options and financial planning strategies.</p>
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_13" 
+                   class="view-playlist" 
+                   target="_blank" 
+                   rel="noopener noreferrer">View Full Playlist</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Entrepreneurship Skills Category -->
+<div class="category-section">
+    <h2 class="category-title">Entrepreneurship Skills</h2>
+    <div class="playlist-grid">
+        <!-- Business Planning -->
+        <div class="playlist-card">
+            <h3>Business Planning</h3>
+            <div class="video-container">
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_14" 
+                   class="video-placeholder" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   data-playlist-id="PLAYLIST_ID_14">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Creating effective business plans</p>
+                </a>
+            </div>
+            <div class="playlist-description">
+                <p>Step-by-step guide to creating comprehensive business plans.</p>
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_14" 
+                   class="view-playlist" 
+                   target="_blank" 
+                   rel="noopener noreferrer">View Full Playlist</a>
+            </div>
+        </div>
+
+        <!-- Marketing Strategies -->
+        <div class="playlist-card">
+            <h3>Marketing Essentials</h3>
+            <div class="video-container">
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_15" 
+                   class="video-placeholder" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   data-playlist-id="PLAYLIST_ID_15">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Marketing strategies for small businesses</p>
+                </a>
+            </div>
+            <div class="playlist-description">
+                <p>Learn effective marketing techniques to grow your business.</p>
+                <a href="https://www.youtube.com/playlist?list=PLAYLIST_ID_15" 
+                   class="view-playlist" 
+                   target="_blank" 
+                   rel="noopener noreferrer">View Full Playlist</a>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+<script>
+    // Simplified JavaScript for handling playlist interactions
+    document.addEventListener('DOMContentLoaded', function() {
+        const videoPlaceholders = document.querySelectorAll('.video-placeholder');
+        const viewPlaylistButtons = document.querySelectorAll('.view-playlist');
+
+        // Handle playlist thumbnail clicks
+        videoPlaceholders.forEach(placeholder => {
+            placeholder.addEventListener('click', function(e) {
+                // Link behavior is handled by HTML attributes (target="_blank")
+                // This is just for additional functionality if needed
+                console.log('Opening playlist:', this.dataset.playlistId);
+            });
+        });
+
+        // Handle view playlist button clicks
+        viewPlaylistButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Link behavior is handled by HTML attributes (target="_blank")
+                // This is just for additional functionality if needed
+                console.log('Opening full playlist view');
+            });
+        });
+    });
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Suchita Foundation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #92400E;
+            --primary-light: #FEF3C7;
+            --secondary: #E67E22;
+            --accent1: #2563EB;
+            --accent2: #DC2626;
+            --success: #059669;
+            --white: #FFFFFF;
+        }
+
+        /* Hero Section */
+        .about-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('feature-image.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background: var(--primary-light);
+            padding: 80px 0;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .mission-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .mission-card i {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        /* Service Grid */
+        .services-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card i {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Team Section */
+        .team-section {
+            background: var(--primary-light);
+            padding: 80px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .team-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .team-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .team-info h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .team-info p {
+            color: var(--secondary);
+            font-style: italic;
+        }
+
+        /* Impact Section */
+        .impact-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 80px 0;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .impact-card {
+            padding: 30px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+        }
+
+        .impact-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+            width: calc(50% - 30px);
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: auto;
+        }
+
+        .timeline-content {
+            background: var(--primary-light);
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -40px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -40px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                width: calc(100% - 30px);
+                margin-left: 30px !important;
+            }
+
+            .timeline-content::before {
+                left: -40px !important;
+            }
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Keep the existing navigation and menu -->
+     <!-- Navigation -->
+     <div class="nav-logo">
+        <a href="index.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+            <img src="Logo.png" alt="Suchita Foundation Logo" class="logo">
+            <h1>Suchita Foundation</h1>
+        </a>
+    </div>
+        
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search..." class="search-input">
+            <div class="search-results"></div>
+        </div>
+
+        <button class="donate-btn" onclick="window.location.href='donation.html'">Donate Us</button>
+        
+    </nav>
+
+    <!-- Main Menu -->
+    <div class="main-menu">
+        <a href="index.html" class="menu-item">Home</a>
+        <a href="about.html" class="menu-item">About Us</a>
+        <a href="our-work.html" class="menu-item" target="_blank">Our Work</a>
+        <a href="campaigns.html" class="menu-item">Campaigns</a>
+        <a href="get-involved.html" class="menu-item">Get Involved</a>
+        <a href="media.html" class="menu-item">Media</a>
+        <a href="resource-centre.html" class="menu-item">Resource Centre</a>
+        <a href="contact us.html" class="menu-item">Contact Us</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="hero-content">
+            <h1>Our Story</h1>
+            <p>At Suchita Foundation, we are dedicated to empowering women across India by breaking barriers and fostering a society where women can thrive as leaders, entrepreneurs, and change-makers. Our organization is built on the principles of equality, innovation, and sustainability, aiming to uplift women through targeted initiatives and holistic support systems.</p>
+        </p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <h2 class="section-title">Our Mission</h2>
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Empower</h3>
+                    <p>Enable women to achieve their full potential through education and skill development</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Support</h3>
+                    <p>Provide resources and guidance for sustainable livelihood development</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>Transform</h3>
+                    <p>Create lasting positive change in communities through women's empowerment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title">What We Do</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Health & Wellness</h3>
+                    <p>Comprehensive healthcare support including reproductive health and nutrition programs</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Education</h3>
+                    <p>Skills development and digital literacy training for economic independence</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>Economic Empowerment</h3>
+                    <p>Entrepreneurship development and financial literacy programs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact-section">
+        <div class="container">
+            <h2 class="section-title">Our Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-number" data-value="10000">0</div>
+                    <p>Women Empowered</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number" data-value="500">0</div>
+                    <p>Communities Reached</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number" data-value="200">0</div>
+                    <p>Successful Businesses</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number" data-value="50">0</div>
+                    <p>Partner Organizations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">Our Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2015</h3>
+                        <p>Foundation established with a focus on women's health and education</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2017</h3>
+                        <p>Launched entrepreneurship development program</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2019</h3>
+                        <p>Expanded to 50+ communities across India</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2021</h3>
+                        <p>Initiated digital literacy and financial inclusion programs</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2023</h3>
+                        <p>Reached milestone of 10,000 women empowered</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>This portal is designed to be a hub of information and resources for our community. Here, you can find updates on our latest initiatives, explore featured products and services, and connect with our team.</p>
+            <p>
+                <a href="about.html">About Us</a> |
+                <a href="get-involved.html">Get-involved</a>|
+                <a href="contact us.html">Contact</a> |
+                <a href="campaigns.html">Campaigns</a>|
+                <a href="contact us.html">Privacy Policy</a>
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Initialize counters
+        function initializeCounters() {
+            const counters = document.querySelectorAll('.impact-number');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const targetValue = parseInt(target.dataset.value);
+                        animateCounter(target, targetValue);
+                        observer.unobserve(target);
+                    }
+                });
+            });
+
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const duration = 2000;
+            const step = duration / 100;
+
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = Math.floor(current).toLocaleString();
+
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                }
+            }, step);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeCounters);
+    </script>
+</body>
+</html>

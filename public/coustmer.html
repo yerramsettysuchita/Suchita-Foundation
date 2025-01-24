@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan Treasures - Customer Marketplace</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        :root {
+            --primary-color: #92400e;
+            --secondary-color: #78350f;
+            --accent-color: #fbbf24;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+        }
+
+        body {
+            background-color: var(--bg-color);
+        }
+
+        /* Innovative Navigation */
+        .nav-container {
+            background: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-bar {
+            position: relative;
+            flex: 0 1 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(146, 64, 14, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .cart-btn, .wishlist-btn {
+            position: relative;
+            padding: 0.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Main Content */
+        .main-container {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Categories Carousel */
+        .categories {
+            margin: 2rem 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 1rem 0;
+        }
+
+        .categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .categories-list {
+            display: flex;
+            gap: 1rem;
+            padding: 0.5rem;
+        }
+
+        .category-item {
+            flex: 0 0 auto;
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border-radius: 25px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .category-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .category-item.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-image-container {
+            position: relative;
+            padding-top: 75%;
+            overflow: hidden;
+        }
+
+        .product-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .wishlist-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .wishlist-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .product-details {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-artisan {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .add-to-cart {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Quick View Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #9ca3af;
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <div class="search-bar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search artisan products...">
+            </div>
+            <div class="nav-actions">
+                <button class="wishlist-btn">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge">0</span>
+                </button>
+                <button class="cart-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Categories -->
+        <div class="categories">
+            <div class="categories-list">
+                <div class="category-item active">All Products</div>
+                <div class="category-item">Handloom</div>
+                <div class="category-item">Jewelry</div>
+                <div class="category-item">Home Decor</div>
+                <div class="category-item">Organic Beauty</div>
+                <div class="category-item">Art & Crafts</div>
+                <div class="category-item">Traditional Wear</div>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid">
+            <!-- Products will be generated here -->
+        </div>
+    </main>
+
+    <!-- Quick View Modal -->
+    <div class="modal" id="quickViewModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Sample product data
+        const products = [
+            {
+                id: 1,
+                name: "Handwoven Silk Scarf",
+                category: "Handloom",
+                price: 1499,
+                image: "saree.webp",
+                artisan: "Maya Sharma",
+                description: "Beautifully handcrafted silk scarf with traditional designs"
+            },
+            {
+                id: 2,
+                name: "Organic Skincare Set",
+                category: "Organic Beauty",
+                price: 2499,
+                image: "skincare.avif",
+                artisan: "Priya Patel",
+                description: "Natural and organic skincare products made with love"
+            },
+            {
+                id: 3,
+                name: "Traditional Necklace",
+                category: "Jewelry",
+                price: 3999,
+                image: "necklace.webp",
+                artisan: "Anjali Singh",
+                description: "Handcrafted traditional jewelry piece"
+            },
+            {
+                id: 4,
+                name: "Embroidered Wall Art",
+                category: "Home Decor",
+                price: 4999,
+                image: "wall art.jpg",
+                artisan: "Ritu Kumar",
+                description: "Beautiful hand-embroidered wall art"
+            }
+        ];
+
+        // Generate product cards
+        function generateProducts() {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = products.map(product => `
+                <div class="product-card slide-up">
+                    <div class="product-image-container">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <button class="wishlist-toggle" onclick="toggleWishlist(${product.id})">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-category">${product.category}</div>
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-artisan">By ${product.artisan}</p>
+                        <div class="product-footer">
+                            <div class="product-price">₹${product.price}</div>
+                            <button class="add-to-cart" onclick="addToCart(${product.id})">
+                                <i class="fas fa-shopping-cart"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            generateProducts();
+            setupCategoryFilter();
+        });
+
+        // Category filtering
+        function setupCategoryFilter() {
+            const categories = document.querySelectorAll('.category-item');
+            categories.forEach(category => {
+                category.addEventListener('click', function() {
+                    categories.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    filterProducts(this.textContent);
+                });
+            });
+        }
+
+        function filterProducts(category) {
+            const filtered = category === 'All Products' 
+                ? products 
+                : products.filter(p => p.category === category);
+            
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
+            
+            setTimeout(() => {
+                productGrid.innerHTML = filtered.map(product => `
+                    <div class="product-card slide-up">
+                        <div class="product-image-container">
+                            <img src="${product.image}" alt="${product.name}" class="product-image">
+                            <button class="wishlist-toggle" onclick="toggleWishlist(${product.id})">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="product-details">
+                            <div class="product-category">${product.category}</div>
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-artisan">By ${product.artisan}</p>
+                            <div class="product-footer">
+                                <div class="product-price">₹${product.price}</div>
+                                <button class="add-to-cart" onclick="addToCart(${product.id})">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }, 300);
+        }
+
+        // Cart functionality
+        let cart = [];
+        function addToCart(productId) {
+            cart.push(productId);
+            updateCartBadge();
+            showNotification('Product added to cart!');
+        }
+
+        function updateCartBadge() {
+            const badge = document.querySelector('.cart-btn .badge');
+            badge.textContent = cart.length;
+            badge.classList.add('fade-in');
+        }
+
+        // Wishlist functionality
+        let wishlist = new Set();
+        function toggleWishlist(productId) {
+            const button = event.currentTarget;
+            if (wishlist.has(productId)) {
+                wishlist.delete(productId);
+                button.innerHTML = '<i class="far fa-heart"></i>';
+                showNotification('Removed from wishlist');
+            } else {
+                wishlist.add(productId);
+                button.innerHTML = '<i class="fas fa-heart"></i>';
+                showNotification('Added to wishlist!');
+            }
+            updateWishlistBadge();
+        }
+
+        function updateWishlistBadge() {
+            const badge = document.querySelector('.wishlist-btn .badge');
+            badge.textContent = wishlist.size;
+            badge.classList.add('fade-in');
+        }
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification fade-in';
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--primary-color);
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                z-index: 1000;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', debounce(function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm) ||
+                product.artisan.toLowerCase().includes(searchTerm)
+            );
+            
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
+            
+            setTimeout(() => {
+                if (filtered.length === 0) {
+                    productGrid.innerHTML = `
+                        <div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 2rem;">
+                            <i class="fas fa-search" style="font-size: 3rem; color: #9ca3af; margin-bottom: 1rem;"></i>
+                            <h3>No products found</h3>
+                            <p>Try adjusting your search terms</p>
+                        </div>
+                    `;
+                } else {
+                    generateProducts(filtered);
+                }
+            }, 300);
+        }, 300));
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    </script>
+</body>
+</html>

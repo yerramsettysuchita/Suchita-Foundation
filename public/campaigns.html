@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaigns - Suchita Foundation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Campaigns Page Specific Styles */
+        .campaigns-section {
+            padding: 120px 0 80px;
+            background-color: #F5F6F8;
+        }
+
+        .campaigns-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .campaigns-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1A202C;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .campaigns-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: #92400E;
+        }
+
+        .campaigns-content {
+            background-color: #92400E;
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .campaign-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .campaign-card {
+            background-color: #FEF3C7;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .campaign-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .campaign-card:hover .campaign-image {
+            transform: scale(1.1);
+        }
+
+        .campaign-details {
+            padding: 20px;
+        }
+
+        .campaign-title {
+            font-size: 22px;
+            color: #92400E;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .campaign-description {
+            color: #1A202C;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .campaign-stats {
+            display: flex;
+            justify-content: space-between;
+            background-color: #FEFCE8;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .campaign-stat {
+            text-align: center;
+        }
+
+        .campaign-stat-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: #92400E;
+        }
+
+        .campaign-stat-label {
+            font-size: 12px;
+            color: #1A202C;
+        }
+
+        .campaign-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .campaign-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .learn-more-btn {
+            background-color: #92400E;
+            color: white;
+        }
+
+        .learn-more-btn:hover {
+            background-color: #7C2D12;
+        }
+
+        .donate-btn {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .donate-btn:hover {
+            background-color: #FEFCE8;
+        }
+
+        .ongoing-campaigns {
+            background-color: #FEF3C7;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .ongoing-campaigns-title {
+            color: #92400E;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .ongoing-campaigns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .ongoing-campaign-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ongoing-campaign-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .ongoing-campaign-icon {
+            font-size: 40px;
+            color: #92400E;
+            margin-right: 20px;
+        }
+
+        .ongoing-campaign-details {
+            flex-grow: 1;
+        }
+
+        .ongoing-campaign-title {
+            color: #92400E;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .ongoing-campaign-progress {
+            height: 10px;
+            background-color: #F5F6F8;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .ongoing-campaign-progress-bar {
+            height: 100%;
+            background-color: #92400E;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 968px) {
+            .campaigns-title {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .campaigns-container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (same as main page) -->
+    <div class="nav-logo">
+        <a href="index.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+            <img src="Logo.png" alt="Suchita Foundation Logo" class="logo">
+            <h1>Suchita Foundation</h1>
+        </a>
+    </div>
+        
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search..." class="search-input">
+            <div class="search-results"></div>
+        </div>
+
+        <button class="donate-btn">Donate Us</button>
+    </nav>
+
+    <!-- Main Menu -->
+    <div class="main-menu">
+        <a href="index.html" class="menu-item">Home</a>
+        <a href="about.html" class="menu-item">About Us</a>
+        <a href="our-work.html" class="menu-item">Our Work</a>
+        <a href="campaigns.html" class="menu-item active">Campaigns</a>
+        <a href="get-involved.html" class="menu-item">Get Involved</a>
+        <a href="media.html" class="menu-item">Media</a>
+        <a href="resource-centre.html" class="menu-item">Resource Centre</a>
+        <a href="contact us.html" class="menu-item">Contact Us</a>
+    </div>
+
+    <!-- Campaigns Section -->
+    <section class="campaigns-section">
+        <div class="campaigns-container">
+            <h1 class="campaigns-title">Our Impactful Campaigns</h1>
+            
+            <div class="campaigns-content">
+                <!-- Campaign Highlights -->
+                <div class="campaign-highlights">
+                    <div class="campaign-card">
+                        <img src="education1`````````.jpg" alt="Women Education Campaign" class="campaign-image">
+                        <div class="campaign-details">
+                            <h3 class="campaign-title">Educate Her, Empower Her</h3>
+                            <p class="campaign-description">A comprehensive campaign focusing on education and skill development for women in rural areas.</p>
+                            <div class="campaign-stats">
+                                <div class="campaign-stat">
+                                    <div class="campaign-stat-number">500+</div>
+                                    <div class="campaign-stat-label">Women Trained</div>
+                                </div>
+                                <div class="campaign-stat">
+                                    <div class="campaign-stat-number">25</div>
+                                    <div class="campaign-stat-label">Villages Covered</div>
+                                </div>
+                                <div class="campaign-stat">
+                                    <div class="campaign-stat-number">80%</div>
+                                    <div class="campaign-stat-label">Success Rate</div>
+                                </div>
+                            </div>
+                            <div class="campaign-actions">
+                                <button class="campaign-btn learn-more-btn">Learn More</button>
+                                <button class="campaign-btn donate-btn">Donate</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="campaign-card">
+                        <img src="eduaction2.webp" alt="Women Health Awareness Campaign" class="campaign-image">
+                        <div class="campaign-details">
+                            <h3 class="campaign-title">Health is Wealth</h3>
+                            <p class="campaign-description">Focusing on women's health, reproductive rights, and preventive healthcare solutions.</p>
+                            <div class="campaign-stats">
+                                <div class="campaign-stat">
+                                    <div class="campaign-stat-number">1000+</div>
+                                    <div class="campaign-stat-label">Women Screened</div>
+                                </div>
+                                <div class="campaign-stat">
+                                    <div class="campaign-stat-number">35</div>
+                                    <div class="campaign-stat-label">Health Camps</div>
+                                </div>
+                                <div class="campaign-stat">
+                                    <div class="campaign-stat-number">70%</div>
+                                    <div class="campaign-stat-label">Early Detection</div>
+                                </div>
+                            </div>
+                            <div class="campaign-actions">
+                                <button class="campaign-btn learn-more-btn">Learn More</button>
+                                <button class="campaign-btn donate-btn">Donate</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="campaign-card">
+                        <img src="enducation4.jpeg" alt="Women Entrepreneurship Campaign" class="campaign-image">
+                        <div class="campaign-details">
+                            <h3 class="campaign-title">Entrepreneurship Unleashed</h3>
+                            <p class="campaign-description">Empowering women with entrepreneurial skills, financial literacy, and business support.</p>
+                            <div class="campaign-stats">
+                                <div class="campaign-stat">
+                                    <div class="campaign-stat-number">250+</div>
+                                    <div class="campaign-stat-label">Businesses Started</div>
+                                </div>
+                                <div class="campaign-stat">
+                                    <div class="campaign-stat-number">15</div>
+                                    <div class="campaign-stat-label">Cities Reached</div>
+                                </div>
+                                <div class="campaign-stat">
+                                    <div class="campaign-stat-number">60%</div>
+                                    <div class="campaign-stat-label">Growth Rate</div>
+                                </div>
+                            </div>
+                            <div class="campaign-actions">
+                                <button class="campaign-btn learn-more-btn">Learn More</button>
+                                <button class="campaign-btn donate-btn">Donate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ongoing Campaigns -->
+                <div class="ongoing-campaigns">
+                    <h2 class="ongoing-campaigns-title">Ongoing Campaigns</h2>
+                    <div class="ongoing-campaigns-grid">
+                        <div class="ongoing-campaign-item">
+                            <i class="fas fa-graduation-cap ongoing-campaign-icon"></i>
+                            <div class="ongoing-campaign-details">
+                                <div class="ongoing-campaign-title">Digital Literacy Mission</div>
+                                <div class="ongoing-campaign-progress">
+                                    <div class="ongoing-campaign-progress-bar" style="width: 65%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ongoing-campaign-item">
+                            <i class="fas fa-hands-helping ongoing-campaign-icon"></i>
+                            <div class="ongoing-campaign-details">
+                                <div class="ongoing-campaign-title">Skill Development Program</div>
+                                <div class="ongoing-campaign-progress">
+                                    <div class="ongoing-campaign-progress-bar" style="width: 45%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ongoing-campaign-item">
+                            <i class="fas fa-heart ongoing-campaign-icon"></i>
+                            <div class="ongoing-campaign-details">
+                                <div class="ongoing-campaign-title">Women's Wellness Initiative</div>
+                                <div class="ongoing-campaign-progress">
+                                    <div class="ongoing-campaign-progress-bar" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ongoing-campaign-item">
+                            <i class="fas fa-chart-line ongoing-campaign-icon"></i>
+                            <div class="ongoing-campaign-details">
+                                <div class="ongoing-campaign-title">Economic Empowerment</div>
+                                <div class="ongoing-campaign-progress">
+                                    <div class="ongoing-campaign-progress-bar" style="width: 55%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="main.js"></script>
+</body>
+</html>
