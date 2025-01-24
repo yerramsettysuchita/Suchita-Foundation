@@ -1,0 +1,159 @@
+/* Our Work Page Styles */
+.our-work-section {
+    padding: 60px 0;
+    background-color: #F7F8FA;
+}
+
+.page-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #2D3748;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.intro-text {
+    max-width: 800px;
+    margin: 0 auto 60px;
+    text-align: center;
+    color: #4A5568;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Category Sections */
+.category-section {
+    margin-bottom: 80px;
+}
+
+.category-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #92400E;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #92400E;
+}
+
+/* Playlist Grid */
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+    .playlist-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Playlist Cards */
+.playlist-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.playlist-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.playlist-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2D3748;
+    padding: 20px;
+    margin: 0;
+    background-color: #F8F9FA;
+}
+
+/* Video Container */
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background-color: #000;
+}
+
+.video-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #1A202C;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.video-placeholder:hover {
+    background-color: #2D3748;
+}
+
+.video-placeholder i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #92400E;
+}
+
+.video-placeholder p {
+    font-size: 16px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+/* Playlist Description */
+.playlist-description {
+    padding: 20px;
+}
+
+.playlist-description p {
+    color: #4A5568;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.view-playlist {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #92400E;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.view-playlist:hover {
+    background-color: #78350F;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 32px;
+    }
+
+    .category-title {
+        font-size: 24px;
+    }
+
+    .intro-text {
+        font-size: 16px;
+        padding: 0 20px;
+    }
+
+    .playlist-card h3 {
+        font-size: 18px;
+    }
+}
