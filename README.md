@@ -31,7 +31,3 @@ This platform is a small yet meaningful step towards achieving gender equality a
 
 ## Contact Information
 For inquiries or partnerships, reach out via the **Contact Us** page.
-
----
-
-Let me know if you'd like any additional details or adjustments!
